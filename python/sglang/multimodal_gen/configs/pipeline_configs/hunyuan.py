@@ -157,6 +157,9 @@ class FastHunyuanConfig(HunyuanConfig):
     """Configuration specifically optimized for FastHunyuan weights."""
 
     # Override HunyuanConfig defaults
+    vae_config: VAEConfig = field(
+        default_factory=lambda: HunyuanVAEConfig(parallel_decode_mode="tiled")
+    )
     flow_shift: int = 17
 
     # No need to re-specify guidance_scale or embedded_cfg_scale as they

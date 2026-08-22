@@ -199,6 +199,12 @@ vae_sp: true
 enable_torch_compile: false
 ```
 
+FastHunyuan uses tiled VAE decode by default. At its default
+1280×720×125 output shape, spatial-shard decode gathers the full VAE
+mid-block attention input and would require a 197.75 GiB causal mask. You can
+still override the policy with `--vae-config.parallel-decode-mode`, but
+`spatial` and `spatial_shard` should only be used for smaller validated shapes.
+
 ## Generate
 
 `sglang generate` runs a single generation job and exits when the job finishes.
